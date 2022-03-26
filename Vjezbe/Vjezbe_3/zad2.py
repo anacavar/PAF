@@ -13,9 +13,7 @@ def relativna_pogreska(delta_t):
     rel_pogreska = []
     domet_analiticki=p.analiticki_domet()
     for dt in delta_t:
-        p.set_initial_conditions(10, 0, 0, 60)
         domet_numericki=p.range(dt)
-        p.reset()
         rel = abs(domet_analiticki-domet_numericki)/domet_analiticki*100
         rel_pogreska.append(rel)
     return rel_pogreska #vraća listu
