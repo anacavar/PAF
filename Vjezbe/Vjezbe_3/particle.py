@@ -44,25 +44,23 @@ class Particle():
         self.v_y.append(vy0)
 
     def __move(self, dt=0.01):
-        self.reset()
-        i = 0
-        while self.y[i]>=0:
-            g=9.81
-            self.x.append(self.x[i]+self.v_x*dt)
-            self.v_y.append(self.v_y[i]-g*dt)
-            self.y.append(self.y[i]+self.v_y[i]*dt)
-            self.t.append(self.t[i]+dt)
-            i+=1
-        return self.x, self.y
+        self.x.append(self.x[-1]+self.v_x*dt)
+        self.v_y.append(self.v_y[-1]-9.81*dt)
+        self.y.append(self.y[-1]+self.v_y[-1]*dt)
+        self.t.append(self.t[-1]+dt)
 
     def range(self, dt=0.01):
         # numerički računa domet projektila
-        self.__move(dt)
+        self.reset()
+        while self.y[-1]>=0:
+            self.__move(dt)
         max_x=max(self.x, key=abs)
         return max_x
 
     def plot_trajectory(self):
-        self.__move()
+        self.reset()
+        while self.y[-1]>=0:
+            self.__move()
         plt.plot(self.x, self.y)
         plt.title('x - y graf')
         plt.xlabel("x [m]")
@@ -88,7 +86,11 @@ class Particle():
         hit_velocities=[]
         for v in all_velocities:
             self.set_initial_conditions(v, 0, 0, kut0)
-            x, y = self.__move()
+            self.reset()
+            while self.y[-1]>=0:
+                self.__move()
+            x = self.x
+            y = self.y
             n = len(x)
             distance = []
             for i in range (n):
@@ -119,7 +121,11 @@ class Particle():
         hit_angles=[]
         for kut0 in all_angles:
             self.set_initial_conditions(v, 0, 0, kut0)
-            x, y = self.__move()
+            self.reset()
+            while self.y[-1]>=0:
+                self.__move()
+            x = self.x
+            y = self.y
             n = len(x)
             distance = []
             for i in range (n):
@@ -141,7 +147,3 @@ class Particle():
         else:
             print('Meta neće biti pogođena ali minimalna udaljenost od', round(min_d, 2), 'm dosegnuta je pri kutu od', kut0_min_d, 'stupnjeva')
             return min_d
-
-
-        
-
