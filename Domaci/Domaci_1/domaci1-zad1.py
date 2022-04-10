@@ -1,4 +1,7 @@
+import sys
+sys.path.append('C:\\repos\\PAF\\Vjezbe\\Vjezbe_3')
 import particle
+
 
 p = particle.Particle()
 p.set_initial_conditions(1, 0, 0, 45)
