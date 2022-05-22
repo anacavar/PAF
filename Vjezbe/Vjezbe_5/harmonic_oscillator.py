@@ -19,6 +19,12 @@ class HarmonicOscillator:
         self.a=[-self.k/self.m*x0]
         self.t=[0]
 
+    def reset(self):
+        self.x = [self.x[0]]
+        self.v = [self.v[0]]
+        self.a = [self.a[0]]
+        self.t = [self.t[0]]
+
     def __move(self, dt):
         self.v.append(self.v[-1]+self.a[-1]*dt)
         self.x.append(self.x[-1]+self.v[-1]*dt)
