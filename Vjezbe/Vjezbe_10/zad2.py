@@ -1,14 +1,14 @@
 from cestica import Cestica
 import matplotlib.pyplot as plt
 
-B = 5 # u z smjeru
+B = 1 # u z smjeru
 
 elektron = Cestica(0, 0, 0, 0, 0, B, -1, 1)
 
-elektron.gibanje(0, 0, 0, 5, 5, 1, dt=0.001)
+elektron.gibanje(0, 0, 0, 0.1, 0.1, 0.1, dt=0.01)
 x_e, y_e, z_e = elektron.getCoordinates()
 
-elektron.gibanje_RungeKutta(0, 0, 0, 5, 5, 1, dt=0.001)
+elektron.gibanje_RungeKutta(0, 0, 0, 0.1, 0.1, 0.1, dt=0.01)
 x_r, y_r, z_r = elektron.getCoordinates()
 
 fig = plt.figure()
@@ -20,3 +20,4 @@ ax.set_xlabel('x/m')
 ax.set_ylabel('y/m')
 ax.set_zlabel('z/m')
 plt.show()
+

@@ -16,7 +16,7 @@ class Cestica:
         self.r.append(self.r[-1]+self.v[-1]*dt)
         self.t.append(self.t[-1]+dt)
 
-    def gibanje(self, x0, y0, z0, vx0, vy0, vz0, t=10, dt=0.0001):
+    def gibanje(self, x0, y0, z0, vx0, vy0, vz0, t=20, dt=0.0001):
         r0 = np.array((x0, y0, z0))
         v0 = np.array((vx0, vy0, vz0))
         a0 = self.q*np.cross(v0, self.B)/self.m
@@ -42,7 +42,7 @@ class Cestica:
         k1_r = self.v[-1]*dt
         k2_v = self.__a(self.v[-1]+k1_v/2)*dt
         k2_r = (self.v[-1]+k1_v/2)*dt
-        k3_v = self.__a(self.v[-1]*k2_v/2)*dt
+        k3_v = self.__a(self.v[-1]+k2_v/2)*dt
         k3_r = (self.v[-1]+k2_v/2)*dt
         k4_v = self.__a(self.v[-1]+k3_v)*dt
         k4_r = (self.v[-1]+k3_v)*dt
@@ -55,7 +55,7 @@ class Cestica:
         a = F/self.m
         return a
 
-    def gibanje_RungeKutta(self, x0, y0, z0, vx0, vy0, vz0, t=10, dt=0.0001):
+    def gibanje_RungeKutta(self, x0, y0, z0, vx0, vy0, vz0, t=20, dt=0.0001):
         r0 = np.array((x0, y0, z0))
         v0 = np.array((vx0, vy0, vz0))
         a0 = self.q*np.cross(v0, self.B)/self.m
