@@ -28,7 +28,7 @@ class Sustav():
             planet.a.append(self.__gravitacija_na_planet(planet))
 
     def __gravitacija_na_planet(self, planet):
-        # računa i vraća ukupnu akceleraciju na pojedini planet u međudjelovanju sa svim ostalim tijelima u sustavu
+        # računa i vraća ukupnu akcečeraciju na pojedini planet u međudjelovanju sa svim ostalim tijelima u sustavu
         planets = [i for i in self.planeti]
         planets.remove(planet)
         F_ukupna = np.array((0, 0))
@@ -46,7 +46,8 @@ class Sustav():
         F = G*planet1.mass*planet2.mass/r**3 * r12 # vektor u smjeru planeta 2
         return F
 
-    def evolve(self, dt=60*60*24, t = 2*60*60*24*365.25):
+    def evolve(self, dt=60*60*24, t = 100*60*60*24*365.25):
+    # def evolve(self, dt=0.1, t = 50):
         # prije gibanja postavimo odnose gravitacijskih sila na tijela
         self.__apply_gravity()
         # u svakom trenutku pomaknemo svaki planet za jedan korak
